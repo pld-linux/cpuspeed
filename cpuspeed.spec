@@ -10,8 +10,6 @@ Source1:	cpuspeed.init
 Patch0:		%{name}-warning.diff
 Patch1:		%{name}-idlenice.diff
 Patch2:		%{name}-nostrip.diff
-BuildRequires:	groff
-BuildRequires:	gettext
 BuildRequires:	gcc-c++
 Requires(post,preun): /sbin/chkconfig
 ExclusiveArch:	%{ix86} %{x8664} ppc ppc64
