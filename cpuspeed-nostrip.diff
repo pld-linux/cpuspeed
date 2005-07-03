@@ -1,0 +1,10 @@
+--- cpuspeed-1.2.1/Makefile~	2005-05-09 18:31:51.000000000 -0400
++++ cpuspeed-1.2.1/Makefile	2005-05-09 18:31:57.000000000 -0400
+@@ -11,7 +11,6 @@ fake: $(FAKE_TARGET)
+ $(TARGET): cpuspeed.cc
+ 	$(CC) -c $(COPTS) cpuspeed.cc
+ 	$(CC) cpuspeed.o -o $(TARGET)
+-	strip $(TARGET)
+ 
+ # Debug target
+ $(DEBUG_TARGET): cpuspeed.cc
