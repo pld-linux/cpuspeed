@@ -62,5 +62,5 @@ fi
 %defattr(644,root,root,755)
 %doc CHANGES EXAMPLES FEATURES README TODO USAGE
 %attr(755,root,root) %{_sbindir}/*
-/etc/sysconfig/*
+%attr(754,root,root) /etc/sysconfig/*
 /etc/rc.d/init.d/*
