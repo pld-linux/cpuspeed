@@ -1,0 +1,56 @@
+--- ./cpuspeed-1.2.1/cpuspeed.cc~	2005-04-06 15:04:28.000000000 -0300
++++ ./cpuspeed-1.2.1/cpuspeed.cc	2005-04-06 15:12:55.000000000 -0300
+@@ -122,6 +122,9 @@
+ unsigned current_speed; // current speed step
+ unsigned last_step; // lowest speed step
+ 
++// whether to account nice time as user time (true) or idle time (false)
++bool include_nice = false;
++
+ // which CPU are we controlling
+ unsigned cpu = 0;
+ 
+@@ -324,8 +327,10 @@
+         &system_time, &idle_time, &wait_time
+     );
+ 
+-    // count nice time as idle time
+-    idle_time += nice_time;
++    if (!include_nice)
++	 idle_time += nice_time;
++    else
++	 user_time += nice_time;
+ 
+     // count IO wait time as idle time
+     idle_time += wait_time;
+@@ -598,6 +603,8 @@
+             fprintf(stderr, "CPU interval is %u\n", interval);
+ #endif
+         }
++	else if(!strcmp(argv[i], "-n"))
++	    include_nice = true;
+         else if(!strcmp(argv[i], "-p"))
+         {
+             if (argc <= i + 2)
+@@ -708,6 +715,9 @@
+                 "            Sets the interval between idle percentage tests and possible speed\n"
+                 "            changes in tenths of a second (default is 20).\n"
+                 "\n"
++		"        -n\n"
++                "            Includes nice time as cpu time (off by default)\n"
++                "\n"
+                 "        -p <fast up> <threshold>\n"
+                 "            Sets the CPU idle percentage thresholds.  <fast up> is the idle\n"
+                 "            percentage below which a CPU will be set to the highest possible\n"
+--- ./cpuspeed-1.2.1/cpuspeed.conf~	2005-04-06 15:11:46.000000000 -0300
++++ ./cpuspeed-1.2.1/cpuspeed.conf	2005-04-06 15:11:52.000000000 -0300
+@@ -4,6 +4,9 @@
+ # uncomment this and set to the name of your CPUFreq module
+ #DRIVER="powernow-k7"
+ 
++# Let background (nice) processes speed up the cpu
++OPTS="$OPTS -n"
++
+ # Add your favorite options here
+ #OPTS="$OPTS -s 0 -i 10 -r"
+ 
