@@ -1,0 +1,83 @@
+#!/bin/sh
+# Startup script for cpuspeed
+#
+# chkconfig: 12345 06 99
+# description: Run dynamic CPU speed daemon
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+[ -f /usr/sbin/cpuspeed ] || exit 0
+
+# Get config.
+if [ -f /etc/sysconfig/cpuspeed ]; then
+        . /etc/sysconfig/cpuspeed
+fi
+
+start() {
+    if [ ! -f /var/lock/subsys/cpuspeed ]; then
+        # Attempt to load scaling_driver if not loaded but it is configured
+        if [ ! -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver ]; then
+            [ -n "$DRIVER" ] && /sbin/modprobe "$DRIVER"
+        fi
+
+        # If not loaded, abort cpuspeed without [FAILED] message
+        [ ! -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver ] &&  return 0
+
+	msg_starting cpuspeed
+
+        daemon cpuspeed -d $OPTS
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && touch /var/lock/subsys/cpuspeed
+    else
+        return 0
+    fi
+    return $RETVAL
+}
+
+stop() {
+    if test "x`pidof cpuspeed`" != x; then
+	msg_stopping cpuspeed
+	killproc cpuspeed -INT
+	sleep 1
+	echo
+    fi
+    if test "x`pidof cpuspeed`" != x; then
+	killproc cpuspeed
+    fi
+    RETVAL=$?
+    [ $RETVAL = 0 ] && rm -f /var/lock/subsys/cpuspeed
+    return $RETVAL
+}
+
+case "$1" in
+	start)
+	    start
+	    ;;
+	
+	stop)
+	    stop
+	    ;;
+	
+	status)
+	    status cpuspeed
+	    ;;
+	restart)
+	    stop
+	    start
+	    ;;
+	condrestart)
+	    if test "x`pidof cpuspeed`" != x; then
+		stop
+		start
+	    fi
+	    ;;
+	
+	*)
+	    echo $"Usage: $0 {start|stop|restart|condrestart|status}"
+	    exit 1
+
+esac
+
+exit $RETVAL
