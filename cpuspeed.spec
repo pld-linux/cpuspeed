@@ -32,10 +32,9 @@ or similar support).
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{/etc/{sysconfig,rc.d/init.d},%{_sbindir}}
 
-install -d $RPM_BUILD_ROOT/etc/{sysconfig,rc.d/init.d}
-install -d $RPM_BUILD_ROOT/%{_sbindir}
-install cpuspeed $RPM_BUILD_ROOT/%{_sbindir}
+install cpuspeed $RPM_BUILD_ROOT%{_sbindir}
 install cpuspeed.conf $RPM_BUILD_ROOT/etc/sysconfig/cpuspeed
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/cpuspeed
 
@@ -63,4 +62,4 @@ fi
 %doc CHANGES EXAMPLES FEATURES README TODO USAGE
 %attr(755,root,root) %{_sbindir}/*
 %attr(754,root,root) /etc/sysconfig/*
-/etc/rc.d/init.d/*
+%attr(754,root,root) /etc/rc.d/init.d/*
