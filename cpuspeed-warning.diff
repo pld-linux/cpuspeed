@@ -1,0 +1,11 @@
+--- cpuspeed-1.2.1/cpuspeed.cc~	2005-01-10 17:53:10.000000000 -0500
++++ cpuspeed-1.2.1/cpuspeed.cc	2005-01-10 17:53:21.000000000 -0500
+@@ -769,7 +769,7 @@ main(unsigned argc, char * argv[])
+                 "Author:\n"
+                 "    Carl Thompson - cet [at] carlthompson.net  (copyright 2002 - 2005)\n"
+                 "\n"
+-                , NAME, VERSION, NAME, NAME
++                , NAME, VERSION, NAME
+             );
+             exit(0);
+         }
