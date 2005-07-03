@@ -4,12 +4,13 @@ Version:	1.2.1
 Release:	0.1
 License:	GPL
 Group:		Applications/System
-Source0:	cpuspeed-1.2.1.tar.gz
+Source0:	http://carlthompson.net/dl/cpuspeed/cpuspeed-%{version}.tar.gz
 # Source0-md5:	430bed9513bd69d9d864cda5951c2af4
 Source1:	cpuspeed.init
 Patch0:		%{name}-warning.diff
 Patch1:		%{name}-idlenice.diff
 Patch2:		%{name}-nostrip.diff
+URL:		http://carlthompson.net/Software/CPUSpeed/
 BuildRequires:	gcc-c++
 Requires(post,preun): /sbin/chkconfig
 ExclusiveArch:	%{ix86} %{x8664} ppc ppc64
