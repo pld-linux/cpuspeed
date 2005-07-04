@@ -1,4 +1,6 @@
-Summary:	CPU Frequency adjusting daemon.
+# TODO: optflags
+Summary:	CPU Frequency adjusting daemon
+Summary(pl):	Demon reguluj±cy czêstotliwo¶æ pracy CPU
 Name:		cpuspeed
 Version:	1.2.1
 Release:	0.1
@@ -17,10 +19,14 @@ ExclusiveArch:	%{ix86} %{x8664} ppc ppc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-cpuspeed is a daemon that dynamically changes the speed
-of your processor(s) depending upon its current workload
-if it is capable (needs Intel Speedstep, AMD PowerNow!,
-or similar support).
+cpuspeed is a daemon that dynamically changes the speed of your
+processor(s) depending upon its current workload if it is capable
+(needs Intel Speedstep, AMD PowerNow!, or similar support).
+
+%description -l pl
+cpuspeed to demon dynamicznie zmieniaj±cy szybko¶æ procesora(ów) w
+zale¿no¶ci od aktualnego obci±¿enia - o ile procesor to obs³uguje
+(wymaga Intel Speedstep, AMD PowerNow! albo podobnych rozszerzeñ).
 
 %prep
 %setup -q 
@@ -45,17 +51,17 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /sbin/chkconfig --add cpuspeed
 if [ -f /var/lock/subsys/cpuspeed ]; then
-    /etc/rc.d/init.d/cpuspeed restart 1>&2
+	/etc/rc.d/init.d/cpuspeed restart 1>&2
 else 
-    echo "Run \"/etc/rc.d/init.d/cpuspeed start\" to start cpuspeed daemon."
+	echo "Run \"/etc/rc.d/init.d/cpuspeed start\" to start cpuspeed daemon."
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-    if [ -f /var/lock/subsys/cpuspeed ]; then
-	/etc/rc.d/init.d/cpuspeed stop 1>&2
-    fi
-    [ ! -x /sbin/chkconfig ] || /sbin/chkconfig --del cpuspeed
+	if [ -f /var/lock/subsys/cpuspeed ]; then
+		/etc/rc.d/init.d/cpuspeed stop 1>&2
+	fi
+	[ ! -x /sbin/chkconfig ] || /sbin/chkconfig --del cpuspeed
 fi
 
 %files
