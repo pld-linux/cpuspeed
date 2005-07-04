@@ -28,7 +28,6 @@ start() {
 
         daemon cpuspeed -d $OPTS
         RETVAL=$?
-        echo
         [ $RETVAL = 0 ] && touch /var/lock/subsys/cpuspeed
     else
         return 0
@@ -41,7 +40,6 @@ stop() {
 	msg_stopping cpuspeed
 	killproc cpuspeed -INT
 	sleep 1
-	echo
     fi
     if test "x`pidof cpuspeed`" != x; then
 	killproc cpuspeed
