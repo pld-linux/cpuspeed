@@ -3,7 +3,7 @@ Summary:	CPU Frequency adjusting daemon
 Summary(pl):	Demon reguluj±cy czêstotliwo¶æ pracy CPU
 Name:		cpuspeed
 Version:	1.2.1
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://carlthompson.net/dl/cpuspeed/cpuspeed-%{version}.tar.gz
