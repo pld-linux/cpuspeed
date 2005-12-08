@@ -53,11 +53,9 @@ case "$1" in
 	start)
 	    start
 	    ;;
-	
 	stop)
 	    stop
 	    ;;
-	
 	status)
 	    status cpuspeed
 	    ;;
@@ -71,7 +69,6 @@ case "$1" in
 		start
 	    fi
 	    ;;
-	
 	*)
 	    echo $"Usage: $0 {start|stop|restart|condrestart|status}"
 	    exit 1
