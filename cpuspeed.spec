@@ -1,4 +1,3 @@
-# TODO: optflags
 Summary:	CPU Frequency adjusting daemon
 Summary(pl):	Demon reguluj±cy czêstotliwo¶æ pracy CPU
 Name:		cpuspeed
@@ -35,7 +34,10 @@ zale¿no¶ci od aktualnego obci±¿enia - o ile procesor to obs³uguje
 %patch2 -p1
 
 %build
-%{__make}
+%{__make} \
+	CC="%{__cc} -fno-exceptions -Wall" \
+	COPTS="%{rpmcflags}"
+	
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -68,5 +70,5 @@ fi
 %defattr(644,root,root,755)
 %doc CHANGES EXAMPLES FEATURES README TODO USAGE
 %attr(755,root,root) %{_sbindir}/*
-%attr(640,root,root) /etc/sysconfig/*
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/*
 %attr(754,root,root) /etc/rc.d/init.d/*
