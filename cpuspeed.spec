@@ -5,15 +5,15 @@ Version:	1.2.1
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	http://carlthompson.net/dl/cpuspeed/cpuspeed-%{version}.tar.gz
+Source0:	http://carlthompson.net/dl/cpuspeed/%{name}-%{version}.tar.gz
 # Source0-md5:	430bed9513bd69d9d864cda5951c2af4
-Source1:	cpuspeed.init
+Source1:	%{name}.init
 Patch0:		%{name}-warning.diff
 Patch1:		%{name}-idlenice.diff
 Patch2:		%{name}-nostrip.diff
 URL:		http://carlthompson.net/Software/CPUSpeed/
 BuildRequires:	gcc-c++
-Requires(post,preun): /sbin/chkconfig
+Requires(post,preun):	/sbin/chkconfig
 ExclusiveArch:	%{ix86} %{x8664} ppc ppc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -28,7 +28,7 @@ zale¿no¶ci od aktualnego obci±¿enia - o ile procesor to obs³uguje
 (wymaga Intel Speedstep, AMD PowerNow! albo podobnych rozszerzeñ).
 
 %prep
-%setup -q 
+%setup -q
 %patch0 -p1
 %patch1 -p2
 %patch2 -p1
@@ -37,7 +37,7 @@ zale¿no¶ci od aktualnego obci±¿enia - o ile procesor to obs³uguje
 %{__make} \
 	CC="%{__cc} -fno-exceptions -Wall" \
 	COPTS="%{rpmcflags}"
-	
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -54,7 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/chkconfig --add cpuspeed
 if [ -f /var/lock/subsys/cpuspeed ]; then
 	/etc/rc.d/init.d/cpuspeed restart 1>&2
-else 
+else
 	echo "Run \"/etc/rc.d/init.d/cpuspeed start\" to start cpuspeed daemon."
 fi
 
