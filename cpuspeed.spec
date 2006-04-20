@@ -13,6 +13,7 @@ Patch1:		%{name}-idlenice.diff
 Patch2:		%{name}-nostrip.diff
 URL:		http://carlthompson.net/Software/CPUSpeed/
 BuildRequires:	gcc-c++
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 ExclusiveArch:	%{ix86} %{x8664} ppc ppc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -38,7 +39,6 @@ zale¿no¶ci od aktualnego obci±¿enia - o ile procesor to obs³uguje
 	CC="%{__cc} -fno-exceptions -Wall" \
 	COPTS="%{rpmcflags}"
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/{sysconfig,rc.d/init.d},%{_sbindir}}
@@ -52,18 +52,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add cpuspeed
-if [ -f /var/lock/subsys/cpuspeed ]; then
-	/etc/rc.d/init.d/cpuspeed restart 1>&2
-else
-	echo "Run \"/etc/rc.d/init.d/cpuspeed start\" to start cpuspeed daemon."
-fi
+%service cpuspeed restart
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/cpuspeed ]; then
-		/etc/rc.d/init.d/cpuspeed stop 1>&2
-	fi
-	[ ! -x /sbin/chkconfig ] || /sbin/chkconfig --del cpuspeed
+	%service cpuspeed stop
+	/sbin/chkconfig --del cpuspeed
 fi
 
 %files
