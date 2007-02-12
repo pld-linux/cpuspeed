@@ -1,5 +1,5 @@
 Summary:	CPU Frequency adjusting daemon
-Summary(pl.UTF-8):   Demon regulujący częstotliwość pracy CPU
+Summary(pl.UTF-8):	Demon regulujący częstotliwość pracy CPU
 Name:		cpuspeed
 Version:	1.2.1
 Release:	1
