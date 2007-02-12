@@ -1,5 +1,5 @@
 Summary:	CPU Frequency adjusting daemon
-Summary(pl):	Demon reguluj±cy czêstotliwo¶æ pracy CPU
+Summary(pl.UTF-8):   Demon regulujÄ…cy czÄ™stotliwoÅ›Ä‡ pracy CPU
 Name:		cpuspeed
 Version:	1.2.1
 Release:	1
@@ -23,10 +23,10 @@ cpuspeed is a daemon that dynamically changes the speed of your
 processor(s) depending upon its current workload if it is capable
 (needs Intel Speedstep, AMD PowerNow!, or similar support).
 
-%description -l pl
-cpuspeed to demon dynamicznie zmieniaj±cy szybko¶æ procesora(ów) w
-zale¿no¶ci od aktualnego obci±¿enia - o ile procesor to obs³uguje
-(wymaga Intel Speedstep, AMD PowerNow! albo podobnych rozszerzeñ).
+%description -l pl.UTF-8
+cpuspeed to demon dynamicznie zmieniajÄ…cy szybkoÅ›Ä‡ procesora(Ã³w) w
+zaleÅ¼noÅ›ci od aktualnego obciÄ…Å¼enia - o ile procesor to obsÅ‚uguje
+(wymaga Intel Speedstep, AMD PowerNow! albo podobnych rozszerzeÅ„).
 
 %prep
 %setup -q
