@@ -30,9 +30,9 @@ zależności od aktualnego obciążenia - o ile procesor to obsługuje
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p2
-%patch2 -p1
+%patch -P0 -p1
+%patch -P1 -p2
+%patch -P2 -p1
 
 %build
 %{__make} \
